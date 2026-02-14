@@ -1,0 +1,6 @@
+{:addon/id           "scc.mcp"
+ :addon/type         :native
+ :addon/init-ns      "scc-mcp.init"
+ :addon/init-fn      "init-as-addon!"
+ :addon/capabilities #{:tools}
+ :addon/description  "scc code metrics — LOC, complexity, language breakdown, hotspot analysis"}
