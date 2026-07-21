@@ -3,5 +3,11 @@
         com.taoensso/timbre {:mvn/version "6.8.0"}
         cheshire/cheshire {:mvn/version "6.2.0"}}
  :aliases
- {:test {:extra-paths ["test"]
+ {
+  ;; :build — tools.build entrypoint (clojure -T:build <task>). Canonical hive
+  ;; build: jar / jar-aot / install / bump / verify-license / deploy.
+  :build {:deps {io.github.clojure/tools.build {:mvn/version "0.10.9"}
+                 slipset/deps-deploy {:mvn/version "0.2.2"}}
+          :ns-default build}
+:test {:extra-paths ["test"]
          :extra-deps {lambdaisland/kaocha {:mvn/version "1.91.1392"}}}}}
