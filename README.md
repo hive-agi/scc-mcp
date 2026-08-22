@@ -1,5 +1,14 @@
 # scc-mcp
 
+<!-- hive-badges -->
+
+[![Clojars Project](https://img.shields.io/clojars/v/io.github.hive-agi/scc-mcp.svg)](https://clojars.org/io.github.hive-agi/scc-mcp)
+[![cljdoc](https://cljdoc.org/badge/io.github.hive-agi/scc-mcp)](https://cljdoc.org/d/io.github.hive-agi/scc-mcp/CURRENT)
+[![release](https://github.com/hive-agi/scc-mcp/actions/workflows/release.yml/badge.svg)](https://github.com/hive-agi/scc-mcp/actions/workflows/release.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
+<!-- /hive-badges -->
+
 Standalone [MCP](https://modelcontextprotocol.io/) server for [scc](https://github.com/boyter/scc) code metrics. Runs on [Babashka](https://babashka.org/) via the [modex-bb](https://github.com/hive-agi/modex-bb) framework.
 
 Provides 4 tools for code metrics: project analysis, complexity hotspots, per-file metrics, and directory comparison.
