@@ -11,7 +11,8 @@
      ;; Legacy fallback:
      (register-tools!)"
   (:require [scc-mcp.tools :as tools]
-            [scc-mcp.log :as log]))
+            [scc-mcp.log :as log]
+            [hive-addon.protocol :as addon]))
 
 ;; =============================================================================
 ;; Resolution Helpers
@@ -31,13 +32,11 @@
 (defonce ^:private addon-instance (atom nil))
 
 (defn- make-addon
-  "Create an IAddon reify for scc-mcp.
-   Returns nil if protocol is not on classpath."
+  "Create an IAddon reify for scc-mcp."
   []
-  (when (try-resolve 'hive-mcp.addons.protocol/IAddon)
-    (let [state (atom {:initialized? false})]
-      (reify
-        hive-mcp.addons.protocol/IAddon
+  (let [state (atom {:initialized? false})]
+    (reify
+      addon/IAddon
 
         (addon-id [_] "scc.mcp")
 
@@ -87,7 +86,7 @@
         (health [_]
           (if (:initialized? @state)
             {:status :ok :details {}}
-            {:status :down :details {:reason "not initialized"}}))))))
+            {:status :down :details {:reason "not initialized"}})))))
 
 ;; =============================================================================
 ;; Dep Registry + Nil-Railway Pipeline
