@@ -5,7 +5,7 @@
         ;; hive-addon: the IAddon contract this addon implements. Depending on
         ;; the contract lib rather than on a host namespace is what lets any
         ;; host, hive-mcp or not, mount this jar.
-        io.github.hive-agi/hive-addon {:mvn/version "0.3.10"}}
+        io.github.hive-agi/hive-addon {:mvn/version "1.0.0"}}
  :aliases
  {
   ;; :build — tools.build entrypoint (clojure -T:build <task>). Canonical hive
