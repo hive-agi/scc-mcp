@@ -4,4 +4,6 @@
  :addon/init-ns      "scc-mcp.init"
  :addon/init-fn      "addon-ctor"
  :addon/capabilities #{:tools}
- :addon/description  "scc code metrics — LOC, complexity, language breakdown, hotspot analysis"}
+ :addon/description  "scc code metrics — LOC, complexity, language breakdown, hotspot analysis"
+ :addon/maturity :stable
+ :addon/trust-class :foss}
