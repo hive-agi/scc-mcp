@@ -12,7 +12,8 @@
      (register-tools!)"
   (:require [scc-mcp.tools :as tools]
             [scc-mcp.log :as log]
-            [hive-addon.protocol :as addon]))
+            [hive-addon.protocol :as addon]
+            [hive-addon.registry.commands :as addon-cmds]))
 
 ;; =============================================================================
 ;; Resolution Helpers
@@ -50,22 +51,21 @@
             (do
               (reset! state {:initialized? true})
               ;; Contribute commands to composite "analysis" tool
-              (when-let [contribute! (try-resolve 'hive-mcp.extensions.registry/contribute-commands!)]
-                (contribute! "analysis" :scc
-                             {"scc"      {:handler #(tools/handle-scc (assoc % :command "analyze"))
-                                          :params {"path" {:type "string" :description "Path to analyze"}}
-                                          :description "Analyze code metrics (lines, complexity, languages)"}
-                              "hotspots" {:handler #(tools/handle-scc (assoc % :command "hotspots"))
-                                          :params {"path" {:type "string" :description "Path to analyze"}
-                                                   "threshold" {:type "number" :description "Minimum complexity for hotspots (default: 20)"}}
-                                          :description "Find complexity hotspots above threshold"}
-                              "file"     {:handler #(tools/handle-scc (assoc % :command "file"))
-                                          :params {"file_path" {:type "string" :description "Path to specific file"}}
-                                          :description "Get metrics for a specific file"}
-                              "compare"  {:handler #(tools/handle-scc (assoc % :command "compare"))
-                                          :params {"path_a" {:type "string" :description "First directory for comparison"}
-                                                   "path_b" {:type "string" :description "Second directory for comparison"}}
-                                          :description "Compare metrics between two directories"}}))
+              (addon-cmds/contribute! "analysis" :scc
+                                       {"scc"      {:handler #(tools/handle-scc (assoc % :command "analyze"))
+                                                     :params {"path" {:type "string" :description "Path to analyze"}}
+                                                     :description "Analyze code metrics (lines, complexity, languages)"}
+                                        "hotspots" {:handler #(tools/handle-scc (assoc % :command "hotspots"))
+                                                     :params {"path" {:type "string" :description "Path to analyze"}
+                                                              "threshold" {:type "number" :description "Minimum complexity for hotspots (default: 20)"}}
+                                                     :description "Find complexity hotspots above threshold"}
+                                        "file"     {:handler #(tools/handle-scc (assoc % :command "file"))
+                                                     :params {"file_path" {:type "string" :description "Path to specific file"}}
+                                                     :description "Get metrics for a specific file"}
+                                        "compare"  {:handler #(tools/handle-scc (assoc % :command "compare"))
+                                                     :params {"path_a" {:type "string" :description "First directory for comparison"}
+                                                              "path_b" {:type "string" :description "Second directory for comparison"}}
+                                                     :description "Compare metrics between two directories"}})
               (log/info "scc-mcp addon initialized")
               {:success? true
                :errors []
